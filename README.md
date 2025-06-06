@@ -63,3 +63,37 @@ MIT License. Use it, fork it, improve it.
 
 Pull requests and suggestions welcome!
 
+
+
+Made with ❤️ by Mounika
+
+
+---
+
+# 7️⃣ (Optional) GitHub Actions Workflow for CI
+
+Create a folder `.github/workflows/` and inside it, create `python-app.yml` with this content to test your app on push:
+
+```yaml
+name: Python App CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run script (test run)
+        run: python main.py --help || echo "Skipping GUI run in CI"
+
